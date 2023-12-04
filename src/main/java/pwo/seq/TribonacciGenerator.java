@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package pwo.seq;
 
 import java.math.BigDecimal;
@@ -16,6 +20,8 @@ public class TribonacciGenerator extends FibonacciGenerator {
 
     @Override
     public BigDecimal nextTerm() {
+        BigDecimal previous = current;
+
         if (lastIndex > 2) {
             current = f_1.add(f_2).add(f_3);
             f_3 = f_2;
@@ -26,7 +32,12 @@ public class TribonacciGenerator extends FibonacciGenerator {
         } else {
             current = new BigDecimal(0);
         }
+
         lastIndex++;
-        return current;
+
+        if (current.compareTo(previous) >= 0)
+            return current;
+        else
+            return previous.subtract(current);
     }
 }
